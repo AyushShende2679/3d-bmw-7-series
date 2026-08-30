@@ -1,6 +1,13 @@
 # BMW 7 Series — Cinematic 3D Scrollytelling Experience
 
+[![Live Demo](https://img.shields.io/badge/Live_Demo-Cloudflare_Workers-F38020?style=for-the-badge&logo=cloudflare&logoColor=white)](https://3d-bmw-7-series.ayushshende2679.workers.dev/)
+[![React](https://img.shields.io/badge/React_18-20232A?style=for-the-badge&logo=react&logoColor=61DAFB)](https://react.dev/)
+[![Vite](https://img.shields.io/badge/Vite_6-646CFF?style=for-the-badge&logo=vite&logoColor=white)](https://vitejs.dev/)
+[![Tailwind CSS](https://img.shields.io/badge/Tailwind_CSS-38B2AC?style=for-the-badge&logo=tailwind-css&logoColor=white)](https://tailwindcss.com/)
+
 An Awwwards-level interactive digital brand experience for the flagship **BMW 7 Series**, powered by full-bleed HTML5 Canvas 2D image sequence rendering, 240-frame 3D anatomical deconstruction, real-time Web Audio API TwinPower Turbo V8 sound synthesis, interactive component telemetry hotspots, and a bespoke luxury vehicle configurator.
+
+🌐 **Live Experience**: [https://3d-bmw-7-series.ayushshende2679.workers.dev/](https://3d-bmw-7-series.ayushshende2679.workers.dev/)
 
 ---
 
@@ -38,7 +45,8 @@ An Awwwards-level interactive digital brand experience for the flagship **BMW 7 
 
 ## 🚀 Tech Stack
 
-- **Framework**: [React 18](https://react.dev/) + [Vite](https://vitejs.dev/)
+- **Framework**: [React 18](https://react.dev/) + [Vite 6](https://vitejs.dev/)
+- **Deployment**: [Cloudflare Workers / Pages](https://workers.cloudflare.com/)
 - **Styling**: [Tailwind CSS](https://tailwindcss.com/) + Custom Glassmorphism / Metallic Gradients
 - **Canvas Engine**: HTML5 Canvas 2D with High-DPI Retina Scaling & Lerp Easing
 - **Audio Engine**: Web Audio API (OscillatorNode, WaveShaper, BiquadFilterNode)
@@ -75,6 +83,7 @@ An Awwwards-level interactive digital brand experience for the flagship **BMW 7 
 ├── package.json                   # Project dependencies & scripts
 ├── tailwind.config.js             # Custom BMW dark luxury color tokens
 ├── postcss.config.js              # PostCSS plugins
+├── wrangler.json                  # Cloudflare deployment config
 └── vite.config.js                 # Vite bundler configuration
 ```
 
@@ -108,9 +117,9 @@ npm run build
 ```
 The optimized production bundle will be generated in the `dist/` directory.
 
-### 5. Preview production build locally
+### 5. Deploy to Cloudflare
 ```bash
-npm run preview
+npx wrangler deploy
 ```
 
 ---
