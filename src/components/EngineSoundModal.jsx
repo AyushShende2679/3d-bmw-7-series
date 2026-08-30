@@ -185,11 +185,10 @@ export const EngineSoundModal = ({ isOpen, onClose }) => {
           {/* Start / Stop Engine Button */}
           <button
             onClick={toggleEngine}
-            className={`w-full sm:w-auto px-6 py-3.5 rounded-2xl font-bold font-mono-tech text-xs tracking-wider transition-all flex items-center justify-center gap-2.5 ${
-              isRunning
+            className={`w-full sm:w-auto px-6 py-3.5 rounded-2xl font-bold font-mono-tech text-xs tracking-wider transition-all flex items-center justify-center gap-2.5 ${isRunning
                 ? 'bg-red-500/20 text-red-400 border border-red-500/40 hover:bg-red-500/30'
                 : 'bg-[#1c69d4] text-white border border-[#1c69d4] hover:bg-[#0066b1] shadow-[0_0_25px_rgba(28,105,212,0.6)]'
-            }`}
+              }`}
           >
             <Power className="w-4 h-4" />
             <span>{isRunning ? 'STOP ENGINE' : 'START V8 ENGINE'}</span>
@@ -202,13 +201,12 @@ export const EngineSoundModal = ({ isOpen, onClose }) => {
             onTouchStart={handleThrottleStart}
             onTouchEnd={handleThrottleEnd}
             disabled={!isRunning}
-            className={`w-full sm:w-auto px-6 py-3.5 rounded-2xl font-bold font-mono-tech text-xs tracking-wider transition-all flex items-center justify-center gap-2.5 select-none ${
-              !isRunning
+            className={`w-full sm:w-auto px-6 py-3.5 rounded-2xl font-bold font-mono-tech text-xs tracking-wider transition-all flex items-center justify-center gap-2.5 select-none ${!isRunning
                 ? 'opacity-40 cursor-not-allowed bg-white/5 border border-white/10 text-white/40'
                 : isThrottling
-                ? 'bg-white text-black scale-95 shadow-[0_0_30px_#ffffff]'
-                : 'bg-white/10 hover:bg-white/20 text-white border border-white/20 active:scale-95'
-            }`}
+                  ? 'bg-white text-black scale-95 shadow-[0_0_30px_#ffffff]'
+                  : 'bg-white/10 hover:bg-white/20 text-white border border-white/20 active:scale-95'
+              }`}
           >
             <Flame className={`w-4 h-4 ${isThrottling ? 'text-orange-500 animate-bounce' : 'text-white/60'}`} />
             <span>PRESS & HOLD THROTTLE</span>

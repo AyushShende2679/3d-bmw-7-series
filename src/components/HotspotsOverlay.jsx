@@ -131,15 +131,14 @@ export const HotspotsOverlay = ({ currentFrame }) => {
                 setActiveHotspot(isSelected ? null : spot);
               }}
               onMouseEnter={() => audioSynth.playUiTick(1300)}
-              className={`relative flex items-center justify-center w-9 h-9 rounded-full border transition-all duration-300 cursor-pointer ${
-                isSelected
+              className={`relative flex items-center justify-center w-9 h-9 rounded-full border transition-all duration-300 cursor-pointer ${isSelected
                   ? 'bg-[#1c69d4] border-white scale-110 shadow-[0_0_25px_#1c69d4]'
                   : 'bg-black/80 border-[#41adff]/70 hover:border-white hover:scale-115 shadow-xl'
-              }`}
+                }`}
             >
               {/* Outer pulsing ring */}
               <span className="absolute inset-0 rounded-full bg-[#1c69d4]/40 hotspot-pulse -z-10" />
-              
+
               <Icon className="w-4 h-4 text-white" />
             </button>
 

@@ -69,7 +69,7 @@ export const preloadSequence = (onProgress) => {
 
       const img = new Image();
       img.src = getFrameUrl(frameIdx);
-      
+
       img.onload = () => {
         imageCache[frameIdx] = img;
         loadedCount++;
@@ -138,22 +138,22 @@ const hexToRgb = (hex) => {
 /**
  * Apply razor-sharp 1:1 full-resolution selective paint shader to vehicle body
  */
-const applySelectivePaintShader = (ctx, drawX, drawY, drawW, drawH, colorTint) => {
+const applySelectivePaintShader = (ctx, img, drawX, drawY, drawW, drawH, colorTint) => {
   if (!colorTint || colorTint.id === 'black-sapphire' || !colorTint.hex) return;
 
   const targetRgb = hexToRgb(colorTint.hex);
   const intensity = colorTint.intensity || 0.75;
 
-  // 1:1 Full native resolution — zero downscale blur
+  // 1:1 Full native resolution
   const bufW = drawW;
   const bufH = drawH;
 
   const { canvas: offCanvas, ctx: offCtx } = getOffscreen(bufW, bufH);
 
-  // Copy crisp vehicle region to offscreen buffer
+  // Draw directly from source image into offscreen buffer (zero negative source coordinate issues)
   offCtx.imageSmoothingEnabled = true;
   offCtx.imageSmoothingQuality = 'high';
-  offCtx.drawImage(ctx.canvas, drawX, drawY, drawW, drawH, 0, 0, bufW, bufH);
+  offCtx.drawImage(img, 0, 0, bufW, bufH);
 
   const imgData = offCtx.getImageData(0, 0, bufW, bufH);
   const data = imgData.data;
@@ -169,7 +169,7 @@ const applySelectivePaintShader = (ctx, drawX, drawY, drawW, drawH, colorTint) =
 
     // ISOLATION MASK:
     // Background is near pitch black (lum <= 20).
-    // Car body panels have luminance between 22 and 185.
+    // Car body panels have luminance between 22 and 225.
     // Extremely bright chrome/reflections (lum > 185) preserve specular clarity.
     if (lum > 20 && lum < 225) {
       let mask = 0;
@@ -196,7 +196,7 @@ const applySelectivePaintShader = (ctx, drawX, drawY, drawW, drawH, colorTint) =
   ctx.save();
   ctx.imageSmoothingEnabled = true;
   ctx.imageSmoothingQuality = 'high';
-  ctx.drawImage(offCanvas, 0, 0, bufW, bufH, drawX, drawY, drawW, drawH);
+  ctx.drawImage(offCanvas, drawX, drawY, drawW, drawH);
   ctx.restore();
 };
 
@@ -225,14 +225,14 @@ export const renderFrameToCanvas = (canvas, ctx, img, colorTint = null) => {
 
   // 2. Apply selective vehicle-only paint shader at full 1:1 resolution
   if (colorTint && colorTint.id !== 'black-sapphire') {
-    applySelectivePaintShader(ctx, drawX, drawY, drawW, drawH, colorTint);
+    applySelectivePaintShader(ctx, img, drawX, drawY, drawW, drawH, colorTint);
   }
 
   // 3. Seamless bottom-right watermark cleanup mask
   const wmSize = Math.max(120, width * 0.09);
   const wmX = width - wmSize;
   const wmY = height - wmSize;
-  
+
   const cornerMask = ctx.createRadialGradient(
     width, height, 0,
     width, height, wmSize * 1.6
@@ -240,7 +240,7 @@ export const renderFrameToCanvas = (canvas, ctx, img, colorTint = null) => {
   cornerMask.addColorStop(0, '#000000');
   cornerMask.addColorStop(0.5, 'rgba(0, 0, 0, 0.95)');
   cornerMask.addColorStop(1, 'rgba(0, 0, 0, 0)');
-  
+
   ctx.fillStyle = cornerMask;
   ctx.fillRect(wmX - 60, wmY - 60, wmSize + 60, wmSize + 60);
 

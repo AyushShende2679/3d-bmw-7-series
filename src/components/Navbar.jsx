@@ -38,11 +38,10 @@ export const Navbar = ({
 
   return (
     <header
-      className={`fixed top-0 left-0 right-0 z-40 transition-all duration-500 ${
-        scrolled
+      className={`fixed top-0 left-0 right-0 z-40 transition-all duration-500 ${scrolled
           ? 'bg-[#050505]/80 backdrop-blur-xl border-b border-white/[0.08] py-3.5 shadow-2xl'
           : 'bg-transparent py-6 border-b border-transparent'
-      }`}
+        }`}
     >
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 flex items-center justify-between">
         {/* Left: Brand Monogram & Model */}
@@ -85,11 +84,10 @@ export const Navbar = ({
                   onNavigate(item.progress);
                 }}
                 onMouseEnter={() => audioSynth.playUiTick(1600)}
-                className={`px-3.5 py-1 text-xs tracking-wider font-medium transition-all duration-300 rounded-full ${
-                  isActive
+                className={`px-3.5 py-1 text-xs tracking-wider font-medium transition-all duration-300 rounded-full ${isActive
                     ? 'text-white bg-white/10 shadow-[0_0_12px_rgba(255,255,255,0.1)]'
                     : 'text-white/60 hover:text-white hover:bg-white/[0.05]'
-                }`}
+                  }`}
               >
                 {item.label}
               </button>
@@ -121,11 +119,10 @@ export const Navbar = ({
             }}
             onMouseEnter={() => audioSynth.playUiTick(1400)}
             title="Customize Exterior Paint"
-            className={`p-2 rounded-full border transition-all duration-300 ${
-              isCustomizerOpen
+            className={`p-2 rounded-full border transition-all duration-300 ${isCustomizerOpen
                 ? 'bg-[#1c69d4] text-white border-[#1c69d4] shadow-[0_0_12px_rgba(28,105,212,0.5)]'
                 : 'bg-white/[0.04] text-white/80 hover:text-white border-white/[0.08] hover:border-white/20'
-            }`}
+              }`}
           >
             <Sparkles className="w-3.5 h-3.5" />
           </button>

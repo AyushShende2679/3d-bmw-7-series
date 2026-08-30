@@ -7,6 +7,7 @@ export const ScrollyCanvas = ({ scrollProgress, selectedColor }) => {
   const targetFrameRef = useRef(1);
   const animFrameIdRef = useRef(null);
   const lastRenderedFrameRef = useRef(-1);
+  const lastRenderedColorRef = useRef(null);
 
   // Update target frame smoothly from scroll progress
   useEffect(() => {
@@ -23,7 +24,8 @@ export const ScrollyCanvas = ({ scrollProgress, selectedColor }) => {
 
     const handleResize = () => {
       if (!canvas) return;
-      const dpr = Math.min(window.devicePixelRatio || 1, 2.5);
+      const isMobile = window.innerWidth < 768;
+      const dpr = Math.min(window.devicePixelRatio || 1, isMobile ? 2.0 : 2.5);
       const width = window.innerWidth;
       const height = window.innerHeight;
 
@@ -36,32 +38,37 @@ export const ScrollyCanvas = ({ scrollProgress, selectedColor }) => {
       ctx.imageSmoothingQuality = 'high';
 
       // Immediate redraw on resize
-      const img = getCachedFrame(currentFrameRef.current);
+      const img = getCachedFrame(Math.round(currentFrameRef.current));
       if (img && img.complete) {
         renderFrameToCanvas(canvas, ctx, img, selectedColor);
+        lastRenderedFrameRef.current = Math.round(currentFrameRef.current);
+        lastRenderedColorRef.current = selectedColor;
       }
     };
 
     handleResize();
-    window.addEventListener('resize', handleResize);
+    window.addEventListener('resize', handleResize, { passive: true });
+    window.addEventListener('orientationchange', handleResize, { passive: true });
 
     const renderLoop = () => {
       const diff = targetFrameRef.current - currentFrameRef.current;
-      
+
       if (Math.abs(diff) > 0.001) {
-        const speed = Math.abs(diff) > 5 ? 0.18 : 0.10;
+        const speed = Math.abs(diff) > 12 ? 0.24 : Math.abs(diff) > 4 ? 0.16 : 0.11;
         currentFrameRef.current += diff * speed;
       } else {
         currentFrameRef.current = targetFrameRef.current;
       }
 
       const frameToDraw = Math.round(currentFrameRef.current);
-      
-      if (frameToDraw !== lastRenderedFrameRef.current || selectedColor) {
+      const colorChanged = selectedColor?.id !== lastRenderedColorRef.current?.id;
+
+      if (frameToDraw !== lastRenderedFrameRef.current || colorChanged) {
         const img = getCachedFrame(frameToDraw);
         if (img && img.complete) {
           renderFrameToCanvas(canvas, ctx, img, selectedColor);
           lastRenderedFrameRef.current = frameToDraw;
+          lastRenderedColorRef.current = selectedColor;
         }
       }
 
@@ -72,6 +79,7 @@ export const ScrollyCanvas = ({ scrollProgress, selectedColor }) => {
 
     return () => {
       window.removeEventListener('resize', handleResize);
+      window.removeEventListener('orientationchange', handleResize);
       if (animFrameIdRef.current) {
         cancelAnimationFrame(animFrameIdRef.current);
       }

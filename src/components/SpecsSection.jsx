@@ -98,11 +98,10 @@ export const SpecsSection = ({ onOpenConfigurator }) => {
                   setActiveTab(cat.id);
                 }}
                 onMouseEnter={() => audioSynth.playUiTick(1300)}
-                className={`flex items-center gap-2 px-5 py-2.5 rounded-full text-xs font-semibold tracking-wider transition-all duration-300 ${
-                  isActive
+                className={`flex items-center gap-2 px-5 py-2.5 rounded-full text-xs font-semibold tracking-wider transition-all duration-300 ${isActive
                     ? 'bg-[#1c69d4] text-white shadow-[0_0_20px_rgba(28,105,212,0.4)] scale-105'
                     : 'bg-white/[0.04] text-white/60 hover:text-white hover:bg-white/[0.08] border border-white/[0.08]'
-                }`}
+                  }`}
               >
                 <Icon className="w-4 h-4" />
                 <span>{cat.name}</span>

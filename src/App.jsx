@@ -17,7 +17,7 @@ export default function App() {
   const [isReady, setIsReady] = useState(false);
   const [scrollProgress, setScrollProgress] = useState(0);
   const [activeSection, setActiveSection] = useState('Overview');
-  
+
   // Modals & UI States
   const [selectedColor, setSelectedColor] = useState(PAINT_OPTIONS[0]);
   const [isCustomizerOpen, setIsCustomizerOpen] = useState(false);

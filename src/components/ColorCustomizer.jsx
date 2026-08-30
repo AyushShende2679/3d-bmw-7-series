@@ -112,11 +112,10 @@ export const ColorCustomizer = ({
                 }}
                 onMouseEnter={() => audioSynth.playUiTick(1400)}
                 title={`${color.name} (${color.type})`}
-                className={`relative aspect-square rounded-xl transition-all duration-300 flex items-center justify-center border cursor-pointer ${
-                  isSelected
+                className={`relative aspect-square rounded-xl transition-all duration-300 flex items-center justify-center border cursor-pointer ${isSelected
                     ? 'border-white scale-110 shadow-[0_0_15px_rgba(255,255,255,0.4)]'
                     : 'border-white/20 hover:border-white/50 hover:scale-105'
-                }`}
+                  }`}
                 style={{ backgroundColor: color.swatch }}
               >
                 {isSelected && (

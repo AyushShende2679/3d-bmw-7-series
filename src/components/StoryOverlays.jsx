@@ -6,7 +6,7 @@ export const StoryOverlays = ({ scrollProgress, onOpenConfigurator, onOpenSoundM
   // Helpers for opacity and visibility based on scroll ranges
   const getBeatVisibility = (start, peakStart, peakEnd, end) => {
     if (scrollProgress < start || scrollProgress > end) return { opacity: 0, pointerEvents: 'none', translateY: 20 };
-    
+
     let opacity = 1;
     let translateY = 0;
 
@@ -51,7 +51,7 @@ export const StoryOverlays = ({ scrollProgress, onOpenConfigurator, onOpenSoundM
         <h1 className="text-5xl sm:text-7xl font-extrabold tracking-tight text-metallic font-display leading-[1.05] mb-4">
           BMW 7 Series
         </h1>
-        
+
         <p className="text-xl sm:text-2xl font-light text-white/90 mb-3 tracking-wide">
           The ultimate expression of performance.
         </p>

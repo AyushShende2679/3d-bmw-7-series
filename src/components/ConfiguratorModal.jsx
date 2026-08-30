@@ -235,11 +235,10 @@ export const ConfiguratorModal = ({ isOpen, onClose, selectedColor, onSelectColo
                             audioSynth.playUiTick(1500);
                             setSelectedModel(model);
                           }}
-                          className={`p-4 rounded-xl border text-left transition-all ${
-                            isSelected
+                          className={`p-4 rounded-xl border text-left transition-all ${isSelected
                               ? 'bg-[#1c69d4]/15 border-[#1c69d4] shadow-[0_0_15px_rgba(28,105,212,0.3)]'
                               : 'bg-white/[0.03] border-white/10 hover:border-white/20'
-                          }`}
+                            }`}
                         >
                           <div className="text-xs font-bold text-white mb-1">{model.name}</div>
                           <div className="text-[10px] font-mono-tech text-white/50 mb-2">{model.engine}</div>
@@ -268,11 +267,10 @@ export const ConfiguratorModal = ({ isOpen, onClose, selectedColor, onSelectColo
                             audioSynth.playUiTick(1600);
                             onSelectColor(color);
                           }}
-                          className={`relative aspect-square rounded-xl transition-all border flex items-center justify-center ${
-                            isSelected
+                          className={`relative aspect-square rounded-xl transition-all border flex items-center justify-center ${isSelected
                               ? 'border-white scale-110 shadow-[0_0_15px_rgba(255,255,255,0.4)]'
                               : 'border-white/20 hover:border-white/40'
-                          }`}
+                            }`}
                           style={{ backgroundColor: color.swatch }}
                         >
                           {isSelected && <Check className="w-4 h-4 text-white drop-shadow-md" />}
@@ -297,11 +295,10 @@ export const ConfiguratorModal = ({ isOpen, onClose, selectedColor, onSelectColo
                             audioSynth.playUiTick(1400);
                             setSelectedWheel(wheel);
                           }}
-                          className={`w-full p-3 rounded-xl border flex items-center justify-between transition-all ${
-                            isSelected
+                          className={`w-full p-3 rounded-xl border flex items-center justify-between transition-all ${isSelected
                               ? 'bg-[#1c69d4]/15 border-[#1c69d4]'
                               : 'bg-white/[0.03] border-white/10 hover:border-white/20'
-                          }`}
+                            }`}
                         >
                           <div className="text-left">
                             <div className="text-xs font-semibold text-white">{wheel.name}</div>
@@ -331,11 +328,10 @@ export const ConfiguratorModal = ({ isOpen, onClose, selectedColor, onSelectColo
                             audioSynth.playUiTick(1400);
                             setSelectedInterior(interior);
                           }}
-                          className={`p-3 rounded-xl border text-left transition-all ${
-                            isSelected
+                          className={`p-3 rounded-xl border text-left transition-all ${isSelected
                               ? 'bg-[#1c69d4]/15 border-[#1c69d4]'
                               : 'bg-white/[0.03] border-white/10 hover:border-white/20'
-                          }`}
+                            }`}
                         >
                           <div
                             className="w-5 h-5 rounded-full border border-white/20 mb-2"
@@ -363,17 +359,15 @@ export const ConfiguratorModal = ({ isOpen, onClose, selectedColor, onSelectColo
                         <button
                           key={pkg.id}
                           onClick={() => togglePackage(pkg.id)}
-                          className={`w-full p-3.5 rounded-xl border text-left flex items-start justify-between gap-4 transition-all ${
-                            isSelected
+                          className={`w-full p-3.5 rounded-xl border text-left flex items-start justify-between gap-4 transition-all ${isSelected
                               ? 'bg-[#1c69d4]/15 border-[#1c69d4]'
                               : 'bg-white/[0.03] border-white/10 hover:border-white/20'
-                          }`}
+                            }`}
                         >
                           <div className="flex items-start gap-3">
                             <div
-                              className={`w-5 h-5 rounded-md mt-0.5 flex items-center justify-center border transition-colors ${
-                                isSelected ? 'bg-[#1c69d4] border-[#1c69d4]' : 'border-white/30'
-                              }`}
+                              className={`w-5 h-5 rounded-md mt-0.5 flex items-center justify-center border transition-colors ${isSelected ? 'bg-[#1c69d4] border-[#1c69d4]' : 'border-white/30'
+                                }`}
                             >
                               {isSelected && <Check className="w-3.5 h-3.5 text-white" />}
                             </div>
